@@ -509,3 +509,40 @@ main {
     width: 100%;
   }
 }
+.movie-controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.genre-filter {
+  display: grid;
+  gap: 6px;
+  color: #506071;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.genre-filter select {
+  min-width: 170px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #ffffff;
+  color: #18212f;
+  cursor: pointer;
+}
+
+.genre-filter select:focus {
+  outline: 3px solid rgba(215, 38, 61, 0.16);
+  border-color: #d7263d;
+}
+.section-heading,
+.movie-controls {
+  align-items: stretch;
+  flex-direction: column;
+}
+.genre-filter select {
+  width: 100%;
+}
