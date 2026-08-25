@@ -6,11 +6,24 @@ import movies from "../data/movies.js";
 function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get("search") || "";
+  const sortOrder = searchParams.get("sort") || "";
   const featuredMovie = movies.find((movie) => movie.featured) || movies[0];
 
-  const filteredMovies = movies.filter((movie) =>
+  const filteredMovies = movies
+  .filter((movie) =>
     movie.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  )
+  .sort((a, b) => {
+    if (sortOrder === "high") {
+      return b.rating - a.rating;
+    }
+
+    if (sortOrder === "low") {
+      return a.rating - b.rating;
+    }
+
+    return 0;
+  });
 
   function handleSearchChange(event) {
     const value = event.target.value;
@@ -54,7 +67,24 @@ function Home() {
             value={searchTerm}
             onChange={handleSearchChange}
           />
-        </label>
+        </label><label className="movie-search">
+  <span>Sort by rating</span>
+  <select
+    value={sortOrder}
+    onChange={(event) => {
+      const value = event.target.value;
+
+      setSearchParams({
+        ...(searchTerm && { search: searchTerm }),
+        ...(value && { sort: value }),
+      });
+    }}
+  >
+    <option value="">Default</option>
+    <option value="high">Rating: High → Low</option>
+    <option value="low">Rating: Low → High</option>
+  </select>
+</label>
       </section>
 
       <MovieGrid movies={filteredMovies} />
