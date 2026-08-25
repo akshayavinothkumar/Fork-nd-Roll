@@ -509,3 +509,77 @@ main {
     width: 100%;
   }
 }
+
+/* =========================================
+   DARK MODE OVERRIDES (ADDED FOR EVENT)
+   ========================================= */
+
+body.dark-theme {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+body.dark-theme .navbar {
+  background: rgba(15, 23, 42, 0.92);
+  border-bottom: 1px solid #1e293b;
+}
+
+body.dark-theme .nav-search input,
+body.dark-theme .movie-search input {
+  background: #1e293b;
+  color: #f8fafc;
+  border-color: #334155;
+}
+
+body.dark-theme .movie-card,
+body.dark-theme .details-layout,
+body.dark-theme .empty-state,
+body.dark-theme .not-found {
+  background: #1e293b;
+  border-color: #334155;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .movie-card p,
+body.dark-theme .details-description,
+body.dark-theme .nav-links a {
+  color: #94a3b8;
+}
+
+body.dark-theme .nav-links a:hover,
+body.dark-theme .nav-links a.active {
+  color: #ffcf56;
+}
+
+body.dark-theme .movie-card-meta span,
+body.dark-theme .details-list div {
+  background: #334155;
+  color: #e2e8f0;
+}
+
+body.dark-theme .footer {
+  background: #0f172a;
+  border-top: 1px solid #1e293b;
+}
+
+/* Button Styling for the Toggle */
+.theme-toggle-btn {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #506071;
+  transition: all 160ms ease;
+  margin-left: 10px;
+}
+
+body.dark-theme .theme-toggle-btn {
+  border-color: #475569;
+  color: #cbd5e1;
+}
+
+body.dark-theme .theme-toggle-btn:hover {
+  background: #334155;
+}

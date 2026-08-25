@@ -1,11 +1,35 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
+
+  // --- DARK MODE LOGIC START ---
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Check local storage when the app first loads
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      setIsDarkMode(true);
+      document.body.classList.add("dark-theme");
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    if (isDarkMode) {
+      document.body.classList.remove("dark-theme");
+      localStorage.setItem("theme", "light");
+      setIsDarkMode(false);
+    } else {
+      document.body.classList.add("dark-theme");
+      localStorage.setItem("theme", "dark");
+      setIsDarkMode(true);
+    }
+  };
+  // --- DARK MODE LOGIC END ---
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -39,6 +63,15 @@ function Navbar() {
           <NavLink to="/movies" onClick={() => setMenuOpen(false)}>
             Movies
           </NavLink>
+          
+          {/* DARK MODE TOGGLE BUTTON */}
+          <button 
+            onClick={toggleDarkMode} 
+            className="theme-toggle-btn" 
+            type="button"
+          >
+            {isDarkMode ? "☀️ Light" : "🌙 Dark"}
+          </button>
         </div>
 
         <form className="nav-search" onSubmit={handleSubmit}>
