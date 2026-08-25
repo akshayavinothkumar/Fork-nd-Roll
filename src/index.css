@@ -246,6 +246,28 @@ main {
   font-size: 0.9rem;
   font-weight: 800;
 }
+.sort-filter {
+  display: grid;
+  gap: 6px;
+  color: #506071;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.sort-filter select {
+  min-width: 190px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #ffffff;
+  color: #18212f;
+  cursor: pointer;
+}
+
+.sort-filter select:focus {
+  outline: 3px solid rgba(215, 38, 61, 0.16);
+  border-color: #d7263d;
+}
 
 .movie-grid {
   display: grid;
@@ -497,6 +519,9 @@ main {
   .details-list {
     grid-template-columns: 1fr;
   }
+  .sort-filter select {
+  width: 100%;
+}
 }
 
 @media (max-width: 480px) {
