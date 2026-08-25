@@ -6,11 +6,20 @@ import movies from "../data/movies.js";
 function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get("search") || "";
+  const selectedGenre = searchParams.get("genre") || "";
   const featuredMovie = movies.find((movie) => movie.featured) || movies[0];
+  const genres = [...new Set(movies.map((movie) => movie.genre))];
 
-  const filteredMovies = movies.filter((movie) =>
-    movie.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredMovies = movies.filter((movie) => {
+  const matchesSearch = movie.title
+    .toLowerCase()
+    .includes(searchTerm.toLowerCase());
+
+  const matchesGenre =
+    selectedGenre === "" || movie.genre === selectedGenre;
+
+  return matchesSearch && matchesGenre;
+});
 
   function handleSearchChange(event) {
     const value = event.target.value;
@@ -54,7 +63,34 @@ function Home() {
             value={searchTerm}
             onChange={handleSearchChange}
           />
-        </label>
+        </label><label className="movie-search">
+  <span>Filter by genre</span>
+  <select
+    value={selectedGenre}
+    onChange={(event) => {
+      const value = event.target.value;
+
+      if (value === "") {
+        setSearchParams(
+          searchTerm ? { search: searchTerm } : {}
+        );
+        return;
+      }
+
+      setSearchParams({
+        ...(searchTerm && { search: searchTerm }),
+        genre: value,
+      });
+    }}
+  >
+    <option value="">All Genres</option>
+    {genres.map((genre) => (
+      <option key={genre} value={genre}>
+        {genre}
+      </option>
+    ))}
+  </select>
+</label>
       </section>
 
       <MovieGrid movies={filteredMovies} />
