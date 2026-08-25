@@ -9,6 +9,7 @@ function Navbar() {
 
   function handleSubmit(event) {
     event.preventDefault();
+
     navigate(`/?search=${encodeURIComponent(searchText.trim())}`);
     setMenuOpen(false);
   }
@@ -36,8 +37,13 @@ function Navbar() {
           <NavLink to="/" onClick={() => setMenuOpen(false)}>
             Home
           </NavLink>
+
           <NavLink to="/movies" onClick={() => setMenuOpen(false)}>
             Movies
+          </NavLink>
+
+          <NavLink to="/watchlist" onClick={() => setMenuOpen(false)}>
+            Watchlist
           </NavLink>
         </div>
 
@@ -48,6 +54,7 @@ function Navbar() {
             value={searchText}
             onChange={(event) => setSearchText(event.target.value)}
           />
+
           <button type="submit">Search</button>
         </form>
       </nav>
