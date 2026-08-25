@@ -155,7 +155,20 @@ const movies = [
     description:
       "Two rival delivery riders keep meeting at the same hidden shortcut and slowly map a city together.",
     poster: "/posters/silver-shortcut.svg"
-  }
+  },
+  {
+    id: 13,
+    title: 'The Mentalist',
+    genre: "Crime",
+    year: 2023,
+    rating: 7.5,
+    duration: "1h 48m",
+    director: "Clara Fox",
+    cast: ["Maya Brooks", "Adil Khan", "June Lane"],
+    description:
+      "Two rival delivery riders keep meeting at the same hidden shortcut and slowly map a city together.",
+    poster: "/posters/silver-shortcut.svg"
+   },
 ];
 
 export default movies;

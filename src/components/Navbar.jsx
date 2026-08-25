@@ -16,7 +16,7 @@ function Navbar() {
   return (
     <header className="navbar">
       <Link to="/" className="logo" onClick={() => setMenuOpen(false)}>
-        <span className="logo-mark">C</span>
+        <span className="logo-mark">Batman</span>
         <span>CineScope</span>
       </Link>
 
