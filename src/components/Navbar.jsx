@@ -1,12 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useTheme } from "./ThemeContext.jsx";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
-
+  const { theme, toggleTheme } = useTheme();
   function handleSubmit(event) {
     event.preventDefault();
     navigate(`/?search=${encodeURIComponent(searchText.trim())}`);
@@ -50,6 +51,14 @@ function Navbar() {
           />
           <button type="submit">Search</button>
         </form>
+        <button
+  className="theme-toggle"
+  type="button"
+  onClick={toggleTheme}
+  aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+>
+  {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+</button>
       </nav>
     </header>
   );
