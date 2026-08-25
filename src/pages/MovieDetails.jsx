@@ -1,11 +1,13 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import movies from "../data/movies.js";
+import { useWatchlist } from "../components/WatchlistContext.jsx";
 
 function MovieDetails() {
   const { movieId } = useParams();
   const movie = movies.find((item) => item.id === Number(movieId));
-
+  const { addToWatchlist, removeFromWatchlist, isInWatchlist } =
+    useWatchlist();
   if (!movie) {
     return (
       <section className="details-page not-found">
@@ -57,7 +59,23 @@ function MovieDetails() {
                 <li key={actor}>{actor}</li>
               ))}
             </ul>
+            
           </div>
+          <button
+  className="button"
+  type="button"
+  onClick={() => {
+    if (isInWatchlist(movie.id)) {
+      removeFromWatchlist(movie.id);
+    } else {
+      addToWatchlist(movie);
+    }
+  }}
+>
+  {isInWatchlist(movie.id)
+    ? "✓ Remove from Watchlist"
+    : "+ Add to Watchlist"}
+</button>
         </div>
       </div>
     </section>
