@@ -156,6 +156,7 @@ const movies = [
       "Two rival delivery riders keep meeting at the same hidden shortcut and slowly map a city together.",
     poster: "/posters/silver-shortcut.svg"
   },
+  {
     id: 13,
     title: 'The Mentalist',
     genre: "Crime",
@@ -167,7 +168,7 @@ const movies = [
     description:
       "Two rival delivery riders keep meeting at the same hidden shortcut and slowly map a city together.",
     poster: "/posters/silver-shortcut.svg"
-   }
+   },
 ];
 
 export default movies;
