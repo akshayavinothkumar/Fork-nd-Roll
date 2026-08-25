@@ -1,21 +1,30 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ darkMode, setDarkMode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
+
     navigate(`/?search=${encodeURIComponent(searchText.trim())}`);
+
     setMenuOpen(false);
+  }
+
+  function handleThemeToggle() {
+    setDarkMode((current) => !current);
   }
 
   return (
     <header className="navbar">
-      <Link to="/" className="logo" onClick={() => setMenuOpen(false)}>
+      <Link
+        to="/"
+        className="logo"
+        onClick={() => setMenuOpen(false)}
+      >
         <span className="logo-mark">C</span>
         <span>CineScope</span>
       </Link>
@@ -31,25 +40,64 @@ function Navbar() {
         <span></span>
       </button>
 
-      <nav className={menuOpen ? "nav-content show" : "nav-content"}>
+      <nav
+        className={menuOpen ? "nav-content show" : "nav-content"}
+      >
         <div className="nav-links">
-          <NavLink to="/" onClick={() => setMenuOpen(false)}>
+          <NavLink
+            to="/"
+            onClick={() => setMenuOpen(false)}
+          >
             Home
           </NavLink>
-          <NavLink to="/movies" onClick={() => setMenuOpen(false)}>
+
+          <NavLink
+            to="/movies"
+            onClick={() => setMenuOpen(false)}
+          >
             Movies
+          </NavLink>
+
+          <NavLink
+            to="/recently-viewed"
+            onClick={() => setMenuOpen(false)}
+          >
+            Recently Viewed
           </NavLink>
         </div>
 
-        <form className="nav-search" onSubmit={handleSubmit}>
-          <input
-            type="search"
-            placeholder="Search movies"
-            value={searchText}
-            onChange={(event) => setSearchText(event.target.value)}
-          />
-          <button type="submit">Search</button>
-        </form>
+        <div className="nav-actions">
+          <form
+            className="nav-search"
+            onSubmit={handleSubmit}
+          >
+            <input
+              type="search"
+              placeholder="Search movies"
+              value={searchText}
+              onChange={(event) =>
+                setSearchText(event.target.value)
+              }
+            />
+
+            <button type="submit">
+              Search
+            </button>
+          </form>
+
+          <button
+            className="theme-toggle"
+            type="button"
+            onClick={handleThemeToggle}
+            aria-label={
+              darkMode
+                ? "Switch to light mode"
+                : "Switch to dark mode"
+            }
+          >
+            {darkMode ? "☀️ Light" : "🌙 Dark"}
+          </button>
+        </div>
       </nav>
     </header>
   );
