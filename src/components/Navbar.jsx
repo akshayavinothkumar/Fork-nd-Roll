@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 function Navbar() {
@@ -9,13 +8,19 @@ function Navbar() {
 
   function handleSubmit(event) {
     event.preventDefault();
+
     navigate(`/?search=${encodeURIComponent(searchText.trim())}`);
+
     setMenuOpen(false);
   }
 
   return (
     <header className="navbar">
-      <Link to="/" className="logo" onClick={() => setMenuOpen(false)}>
+      <Link
+        to="/"
+        className="logo"
+        onClick={() => setMenuOpen(false)}
+      >
         <span className="logo-mark">C</span>
         <span>CineScope</span>
       </Link>
@@ -31,24 +36,48 @@ function Navbar() {
         <span></span>
       </button>
 
-      <nav className={menuOpen ? "nav-content show" : "nav-content"}>
+      <nav
+        className={menuOpen ? "nav-content show" : "nav-content"}
+      >
         <div className="nav-links">
-          <NavLink to="/" onClick={() => setMenuOpen(false)}>
+          <NavLink
+            to="/"
+            onClick={() => setMenuOpen(false)}
+          >
             Home
           </NavLink>
-          <NavLink to="/movies" onClick={() => setMenuOpen(false)}>
+
+          <NavLink
+            to="/movies"
+            onClick={() => setMenuOpen(false)}
+          >
             Movies
+          </NavLink>
+
+          <NavLink
+            to="/recently-viewed"
+            onClick={() => setMenuOpen(false)}
+          >
+            Recently Viewed
           </NavLink>
         </div>
 
-        <form className="nav-search" onSubmit={handleSubmit}>
+        <form
+          className="nav-search"
+          onSubmit={handleSubmit}
+        >
           <input
             type="search"
             placeholder="Search movies"
             value={searchText}
-            onChange={(event) => setSearchText(event.target.value)}
+            onChange={(event) =>
+              setSearchText(event.target.value)
+            }
           />
-          <button type="submit">Search</button>
+
+          <button type="submit">
+            Search
+          </button>
         </form>
       </nav>
     </header>

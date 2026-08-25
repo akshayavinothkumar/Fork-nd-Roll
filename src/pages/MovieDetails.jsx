@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import movies from "../data/movies.js";
 
 function MovieDetails() {
   const { movieId } = useParams();
   const movie = movies.find((item) => item.id === Number(movieId));
+
+  useEffect(() => {
+    if (!movie) return;
+
+    const stored = JSON.parse(
+      localStorage.getItem("recentlyViewed") || "[]"
+    );
+
+    const updated = [
+      movie.id,
+      ...stored.filter((id) => id !== movie.id),
+    ].slice(0, 5);
+
+    localStorage.setItem("recentlyViewed", JSON.stringify(updated));
+  }, [movie]);
 
   if (!movie) {
     return (
@@ -26,6 +41,7 @@ function MovieDetails() {
 
       <div className="details-layout">
         <img src={movie.poster} alt={`${movie.title} poster`} />
+
         <div className="details-content">
           <p className="eyebrow">{movie.genre}</p>
           <h1>{movie.title}</h1>
@@ -36,14 +52,17 @@ function MovieDetails() {
               <span>Release Year</span>
               <strong>{movie.year}</strong>
             </div>
+
             <div>
               <span>Rating</span>
               <strong>★ {movie.rating}</strong>
             </div>
+
             <div>
               <span>Duration</span>
               <strong>{movie.duration}</strong>
             </div>
+
             <div>
               <span>Director</span>
               <strong>{movie.director}</strong>
